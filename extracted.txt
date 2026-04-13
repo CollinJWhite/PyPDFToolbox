@@ -1,0 +1,1285 @@
+
+ReportLab - PDF Processing with Python
+MichaelDriscoll
+Thisbookisforsaleat http://leanpub.com/reportlab
+Thisversionwaspublishedon2019-12-02
+ThisisaLeanpubbook.LeanpubempowersauthorsandpublisherswiththeLeanPublishing
+process.LeanPublishing istheactofpublishinganin-progressebookusinglightweighttoolsand
+manyiterationstogetreaderfeedback,pivotuntilyouhavetherightbookandbuildtractiononce
+youdo.
+©2017-2019MichaelDriscoll
+Contents
+Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+AbouttheAuthor . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+Conventions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+Settingup&ActivatingaVirtualEnvironment . . . . . . . . . . . . . . . . . . . . . . . . . . 2
+Dependencies . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+Installation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+Configuration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+ReaderFeedback . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+Errata. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+CodeExamples . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+Chapter1-GettingStartedwithReportlab . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+TheCanvasObject . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+CanvasMethods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+UsingColorsinReportLab . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+AddingaPhoto . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 26
+Thetextobject . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 28
+CreateaPageBreak . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 34
+CanvasOrientation(Portraitvs.Landscape) . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+Othermethods . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35
+ASimpleSampleApplication . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 36
+WrappingUp . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 37
+Chapter2-ReportLabandFonts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+Unicode/UTF8istheDefault . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+TheStandardFonts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 38
+OtherType-1Fonts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40
+TrueTypeFonts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 43
+AsianFonts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 45
+SwitchingBetweenFonts . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 49
+WrappingUp . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 51
+Introduction
+The Reportlab PDF Toolkit started life in the year 2000 by a company called “Reportlab Inc.”.
+Reportlab is now owned by “ReportLab Europe Ltd”. They produce the open source version of
+Reportlab. The Reportlab toolkit is actually the foundation of their commercial product, Report
+Markup Language which is available in their Reportlab PLUS package. This book is focused on
+the open source version of Reportlab. The Reportlab PDF Toolkit allows you to create in Adobe’s
+Portable Document Format (PDF) quickly and efficiently in the Python programming language.
+ReportlabisthedefactomethodofgeneratingPDFsinPython.YoucanalsouseReportlabtocreate
+chartsandgraphicsinbimapandvectorformatsinadditiontoPDF.Reportlabisknownforitsability
+togenerateaPDFfast.Infact,WikipediachoseReportlabastheirtoolofchoiceforgeneratingPDFs
+oftheircontent.Anytimeyouclickthe“DownloadasPDF”linkontheleftsideofaWikipediapage,
+itusesPythonandReportlabtocreatethePDF!
+In this book, you will learn how to use Reportlab to create PDFs too. This book will be split into
+threesections.Wewillbecoveringthefollowingtopicsinthefirstsection:
+•Thecanvas
+•Drawing
+•Workingwithfonts
+•PLATYPUS
+•Paragraphs
+•Tables
+•OtherFlowables
+•Graphics
+•andMore!
+Inthesecondsection,wewilllearnaboutdataprocessing.Theideahereistotakeinseveraldifferent
+data formats and turn them into PDFs. For example, it is quite common to receive data in XML or
+JSON. But learning how to take that information and turn it into a report is something that isn’t
+coveredveryoften.Youwilllearnhowtodothathere.Intheprocesswewilldiscoverhowtomake
+multipagedocumentswithparagraphsandtablesthatflowacrossthepagescorrectly.
+The last section of the book will cover some of the other libraries you might need when working
+withPDFswithPython.Inthissectionwewilllearnaboutthefollowing:
+•PyPDF2
+•pdfminer
+•PyFPDF
+Introduction 2
+About the Author
+YoumaybewonderingaboutwhoIamandwhyImightbeknowledgeableenoughaboutPythonto
+writeaboutit,soIthoughtI’dgiveyoualittleinformationaboutmyself.Istartedprogrammingin
+PythonintheSpringof2006forajob.MyfirstassignmentwastoportWindowsloginscriptsfrom
+Kixtart to Python. My second project was to port VBA code (basically a GUI on top of Microsoft
+Office products) to Python, which is how I first got started in wxPython. I’ve been using Python
+eversince,doingavariationofbackendprogramminganddesktopfrontenduserinterfacesaswell
+asautomatedtests.
+I realized that one way for me to remember how to do certain things in Python was to write
+about them and that’s how my Python blog came about: http://www.blog.pythonlibrary.org/ . As
+I wrote, I would receive feedback from my readers and I ended up expanding the blog to include
+tips, tutorials, Python news, and Python book reviews. I work regularly with Packt Publishing as
+a technical reviewer, which means that I get to try to check for errors in the books before they’re
+published.IalsohavewrittenfortheDeveloperZone(DZone)andi-programmerwebsitesaswellas
+thePythonSoftwareFoundation.InNovember2013,DZonepublished TheEssentialCorePython
+CheatSheet thatIco-authored.Ihavealsoself-publishedthefollowingbooks:
+•Python101 -June2014
+•Python201:IntermediatePython -Sept.2016
+•wxPythonCookbook -Dec.2016
+Conventions
+Aswithmosttechnicalbooks,thisoneincludesafewconventionsthatyouneedtobeawareof.New
+topicsandterminologywillbein bold.Youwillalsoseesomeexamplesthatlooklikethefollowing:
+>>> myString = "Welcome to Python!"
+The>>>isaPythonpromptsymbol.YouwillseethisinthePython interpreter andinIDLE.Other
+code examples will be shown in a similar manner, but without the >>>. Most of the book will be
+done creating examples in regular Python files, so you won’t be seeing the Python prompt symbol
+allthatoften.
+Setting up & Activating a Virtual Environment
+Ifyoudon’twanttoaddReportLabintoyoursystem’sPythoninstallation,thenyoucanuseavirtual
+environment.InPython2.x-3.2,youwouldneedtoinstallapackagecalled virtualenv tocreatea
+virtualenvironmentforPython.TheideaisthatitwillcreateafolderwithacopyofPythonandpip.
+Introduction 3
+You activate the virtual environment, run the virtual pip and install whateveryouneed to.Python
+3.3 added a module to Python called venvthat does the same thing as the virtualenv package, for
+themostpart.
+Herearesomelinksonhowallthatworks:
+•https://docs.python.org/3/library/venv.html (Python3only)
+•https://pypi.python.org/pypi/virtualenv (Python2and3)
+WhenyouareusingaPythonVirtualEnvironment,youwillneedtofirstactivateit.Activationof
+avirtualenvironmentislikestartingavirtualmachineupinVirtualBoxorVMWare,exceptthatin
+thiscase,it’sjustaPythonVirtualEnvironmentinsteadofanentireoperatingsystem.
+Creating a virtual sandbox with the virtualenv package is quite easy. On Mac and Linux, all you
+needtodoisthefollowinginyourterminalorcommandprompt:
+virtualenv FOLDER_NAME
+To activate a virtual environment on Linux or Mac, you just need to change directories to your
+newly created folder. Inside that folder should be another folder called binalong with a few other
+foldersandafileortwo.Nowyoucanrunthefollowingcommand:
+source bin/activate
+OnWindows,thingsareslightlydifferent.Tocreateavirtualenvironment,youwillprobablyneed
+tousethefullpathtovirtualenv:
+c:\Python27\Scripts\virtualenv.exe
+You should still change directories into your new folder, but instead of bin, there will be a Scripts
+folderthatcanrun activateoutof:
+Scripts\activate
+Onceactivated,youcaninstallanyother3rdpartyPythonpackage.
+Note: It is recommended that you install all 3rd party packages, such as ReportLab or Pillow, in a
+Python Virtual Environment or a user folder. This prevents you from installing a lot of cruft in your
+system Python installation.
+Iwouldalsoliketomentionthat pipsupportsa –userflagthattellsittoinstallthepackagejustfor
+the current user if the platform supports it. There is also an –updateflag (or just -U) that you an
+usetoupdateapackage.Youcanusethisflagasfollows:
+Introduction 4
+python -m pip install PACKAGE_NAME --upgrade
+WhileyoucanalsousepipinstallPACKAGE_NAME,itisnowbecomingarecommendedpractice
+tousethepython-mapproach.WhatthisdoesdifferentlyisthatituseswhateverPythonisonyour
+path and installs to that Python version. The -mflag tells Python to load or run a module which
+inthiscaseis pip.ThiscanbeimportantwhenyouhavemultipleversionsofPythoninstalledand
+youdon’tknowwhichversionofPythonpipitselfwillinstallto.Thus,byusingthepython-mpip
+approach,youknowthatitwillinstalltothePythonthatismappedtoyour“python”command.
+Nowlet’slearnwhatweneedtoinstalltogetReportLabworking!
+Dependencies
+You will need the Python language installed on your maching to use ReportLab. Python is pre-
+installed on Mac OS and most Linux distribututions. Reportlab 3 works with both Python 2.7 and
+Python 3.3+. You can get Python at https://www.python.org/ . They have detailed instructions for
+installingandconfiguringPythonaswellasbuildingPythonshouldyouneedtodoso.
+ReportLab depends on the Python Imaging Library for adding images to PDFs. The Python
+Imaging Library itself hasn’t been maintained in years, but you can use the Pillow(https://pillow.
+readthedocs.io/en/latest/ ) package instead. Pillowis a fork of the Python Imaging Library that
+supportsPython2andPython3andhaslotsofnewenhancementsthattheoriginalpackagedidn’t
+have.Youcaninstallitwithpipaswell:
+python -m pip install pillow
+You may need to run pipas root or Administer depending on where your Python is installed or if
+you are installing to a virtualenv. You may find that you enjoy Pillow so much that you want to
+installitinyoursystemPythoninadditiontoyourvirtualenvironment.
+WearereadytomoveonandlearnhowtoinstallReportLab!
+Installation
+Reportlab3workswithbothPython2.7andPython3.3+.ThisbookwillbefocusingonusingPython
+3andReportLab3.x,butyoucaninstallReportLab3thesamewayinbothversionsofPythonusing
+pip:
+python -m pip install reportlab
+Introduction 5
+If you are using an older version of Python such as Python 2.6 or less, then you will need to use
+ReportLab2.x.TheseolderversionsofReportLabhave*.exeinstallersforWindowsoratarballfor
+other operating systems. If you happen to run a ReportLab exe installer, it will install to Python’s
+systemenvironmentandnotyourvirtualenvironment.
+If you run into issues installing ReportLab, please go to their website and read the documentation
+onthesubjectat https://www.reportlab.com/
+NowyoushouldbereadytouseReportLab!
+Configuration
+ReportLab supports a few options that you can configure globally on your machine or server. This
+configurationfilecanbefoundinthefollowingfile: reportlab/rl_settings.py (ex.C:\PythonXX\Lib\site-
+packages\reportlab). There are a few dozen options that are commented in the source. Here’s a
+sampling:
+•verbose-Arangeofintegervaluesthatcanbeusedtocontroldiagnosticoutput
+•shapeChecking -Defaultsto1.Setto0toturnoffmosterrorcheckinginReportLab’s
+graphicsmodules
+•defaultEncoding -WinAnsiEncoding(default)orMacRomanEncoding
+•defaultPageSize -A4isthedefault,butyoucanchangeittosomethingelse,suchas
+letterorlegal
+•pageCompression -Whatcompressionleveltouse.Thedocumentationdoesn’tsay
+whatvaluescanbeusedthough
+•showBoundary -Defaultsto0,butcanbesetto1togetboundarylinesdrawn
+•T1SearchPath -APythonlistofstringsthatarepathstoT1Fontfonts
+•TTFSearchPath -APythonlistofstringsthatarepathstoTrueTypefonts
+As I said, there are a lot of other settings that you can modify in that Python script. I highly
+recommend opening it up and reading through the various options to see if there’s anything that
+youwillneedtomodifyforyourenvironment.Infact,youcandosoinyourPythoninterpreterby
+doingthefollowing:
+>>>from reportlab import rl_settings
+>>>rl_settings .verbose
+0
+>>>rl_settings .shapeChecking
+1
+Youcannoweasilycheckouteachofthesettingsinaninteractivemanner.
+Introduction 6
+Reader Feedback
+Iwelcomeyourfeedback.Ifyou’dliketoletmeknowwhatyouthoughtofthisbook,youcansend
+commentstothefollowingemailaddress:
+comments@pythonlibrary.org
+Errata
+Itrymybestnottopublisherrorsinmywritings,butithappensfromtimetotime.Ifyouhappen
+toseeanerrorinthisbook,feelfreetoletmeknowbyemailingmeatthefollowing:
+errata@pythonlibrary.org
+Code Examples
+CodefromthebookcanbedownloadedfromGithubatthefollowingaddress:
+•https://github.com/driscollis/reportlabbookcode
+Here’sanalternateshortlinktotheaboveaswell:
+•http://bit.ly/2nc7sbP
+Now,let’sgetstarted!
+Chapter 1 - Getting Started with
+Reportlab
+ReportLab is a very powerful library. With a little effort, you can make pretty much any layout
+thatyoucanthinkof.Ihaveusedittoreplicatemanycomplexpagelayoutsovertheyears.Inthis
+chapter we will be learning how to use ReportLab’s pdfgenpackage. You will discover how to do
+thefollowing:
+•Drawtext
+•Learnaboutfontsandtextcolors
+•Creatingatextobject
+•Drawlines
+•Drawvariousshapes
+Thepdfgenpackageisverylowlevel.Youwillbedrawingor“painting”onacanvastocreateyour
+PDF. The canvas gets imported from the pdfgen package. When you go to paint on your canvas,
+youwillneedtospecifyX/YcoordinatesthattellReportLabwheretostartpainting.Thedefaultis
+(0,0)whoseoriginisatthelowestleftcornerofthepage.Manydesktopuserinterfacekits,suchas
+wxPython, Tkinter, etc, also have this concept. You can place buttons absolutely in many of these
+kitsusingX/Ycoordinatesaswell.Thisallowsforverypreciseplacementoftheelementsthatyou
+areaddingtothepage.
+TheotheritemthatIneedtomakementionofisthatwhenyouarepositioninganiteminaPDF,you
+arepositioningbythenumberof pointsyouarefromtheorigin.It’spoints,notpixelsormillimeters
+orinches.Points!Let’stakealookathowmanypointsareonalettersizedpage:
+>>>from reportlab.lib.pagesizes import letter
+>>>letter
+(612.0 ,792.0 )
+Here we learn that a letter is 612 points wide and 792 points high. Let’s find out how many points
+areinaninchandamillimeter,respectively:
+Chapter1-GettingStartedwithReportlab 8
+>>>from reportlab.lib.units import inch
+>>>inch
+72.0
+>>>from reportlab.lib.units import mm
+>>>mm
+2.834645669291339
+This information will help us position our drawings on our painting. At this point, we’re ready to
+createaPDF!
+The Canvas Object
+Thecanvasobjectlivesinthepdfgenpackage.Let’simportitandpaintsometext:
+# hello_reportlab.py
+from reportlab.pdfgen import canvas
+c=canvas .Canvas( "hello.pdf ")
+c.drawString( 100,100,"Welcome to Reportlab! ")
+c.showPage()
+c.save()
+In this example, we import the canvas object and then instantiate a Canvas object. You will note
+thattheonlyrequirementargumentisafilenameorpath.Nextwecall drawString() onourcanvas
+object and tell it to start drawing the string 100 points to the right of the origin and 100 points up.
+After that we call showPage() method. The showPage() method will save the current page of the
+canvas. It’s actually not required, but it is recommended. The showPage() method also ends the
+currentpage.IfyoudrawanotherstringorsomeotherelementaftercallingshowPage(),thatobject
+will be drawn to a new page. Finally we call the canvas object’s save()method, which save the
+documenttodisk.NowwecanopenitupandseewhatourPDFlookslike:
+Chapter1-GettingStartedwithReportlab 9
+Fig.1-1:WelcometoReportLab
+What you might notice is that our text is near the bottom of the document. The reason for this is
+thattheorigin,(0,0),isthebottomleftcornerofthedocument.SowhenwetoldReportLabtopaint
+ourtext,weweretellingitto startpainting 100points fromtheleft-handsideand100pointsfrom
+the bottom. This is in contrast to creating a user interface in Tkinter or wxPython where to origin
+isthetopleft.
+Alsonotethatsincewedidn’tspecifyapagesize,itdefaultstowhateverisintheReportLabconfig,
+whichisusuallyA4.Therearesomecommonpagesizesthatcanbefoundin reportlab.lib.pagesizes .
+Let’slookattheCanvas’sconstructortoseewhatittakesforarguments:
+Chapter1-GettingStartedwithReportlab 10
+def __init__(self,filename,
+pagesize=None,
+bottomup = 1,
+pageCompression=None,
+invariant = None,
+verbosity=0,
+encrypt=None,
+cropMarks=None,
+pdfVersion=None,
+enforceColorSpace=None,
+):
+Herewecanseethatwecanpassinthe pagesizeasanargument.The pagesizeisactuallyatuple
+ofwidthandheightinpoints.Ifyouwanttochangetheoriginfromthedefaultofbottomleft,then
+youcansetthe bottomup argumentto 0,whichwillchangetheorigintothetopleft.
+ThepageCompression argumentisdefaultedtozerooroff.BasicallyitwilltellReportLabwhether
+or not to compress each page. When compression is enabled, the file generation process is slowed.
+If your work needs your PDFs to be generated as quickly as possible, then you’ll want to keep the
+defaultofzero.Howeverifspeedisn’taconcernandyou’dliketouselessdiskspace,thenyoucan
+turn on page compression. Note that images in PDFs will always be compressed, so the primary
+usecaseforturningonpagecompressioniswhenyouhaveahugeamountoftextorlotsofvector
+graphicsperpage.
+ReportLab’s User Guide makes no mention of what the invariant argument is used for, so I took a
+look at the source code. According to the source, it produces repeatable, identical PDFs with same
+timestamp info (for regression testing) . I have never seen anyone use this argument in their code
+andsincethesourcesaysitisforregressiontesting,Ithinkwecansafelyignoreit.
+Thenextargumentis verbosity ,whichisusedforlogginglevels.Atzero(0),ReportLabwillallow
+other applications to capture the PDF from standard output. If you set it to one (1), a confirmation
+messagewillbeprintedouteverytimeaPDFiscreated.Theremaybeadditionallevelsadded,but
+atthetimeofwriting,theseweretheonlytwodocumented.
+Theencryptargument is used to determine if the PDF should be encrypted as well as how it is
+encrypted. The default is obviously None, which means no encryption at all. If you pass a string
+toencrypt,thatstringwillbethepasswordforthePDF.IfyouwanttoencryptthePDF,thenyou
+will need to create an instance of reportlab.lib.pdfencrypt.StandardEncryption and pass that to
+theencryptargument.
+ThecropMarks argumentcanbesettoTrue,Falseortoanobject.Cropmarksareusedbyprinting
+housestoknowwheretocropapage.WhenyousetcropMarkstoTrueinReportLab,thepagewill
+become3mmlargerthanwhatyousetthepagesizetoandaddsomecropmarkstothecorners.The
+objectthatyoucanpasstocropMarkscontainsthefollowingparameters:borderWidth,markColor,
+markWidthandmarkLength.Theobjectallowsyoutocustomizethecropmarks.
+Chapter1-GettingStartedwithReportlab 11
+ThepdfVersion argumentisusedforensuringthatthePDFversionisgreaterthanorequaltowhat
+waspassedin.CurrentlyReportLabsupportsversions1-4.
+Finally, the enforceColorSpace argument is used to enforce appropriate color settings within the
+PDF.Youcansetittooneofthefollowing:
+•cmyk
+•rgb
+•sep
+•sep_black
+•sep_cmyk
+When one of these is set, a standard _PDFColorSetter callable will be used to do the color
+enforcement.Youcanalsopassinacallableforcolorenforcement.
+Let’s go back to our original example and update it just a bit. Now as I mentioned earlier, in
+ReportLab you can position your elements (text, images, etc) using points. But thinking in points
+is kind of hard when we are used to using millimeters or inches. So I found a clever function we
+canusetohelpusonStackOverflow( http://stackoverflow.com/questions/4726011/wrap-text-in-a-
+table-reportlab ):
+def coord(x, y, height, unit=1):
+x, y = x * unit, height - y * unit
+return x, y
+Thisfunctionrequiresyourxandycoordinatesaswellastheheightofthepage.Youcanalsopass
+inaunitsize.Thiswillallowyoutodothefollowing:
+# canvas_coords.py
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.units import mm
+def coord (x, y, height, unit =1):
+x, y =x*unit, height -y*unit
+return x, y
+c=canvas .Canvas( "hello.pdf ", pagesize =letter)
+width, height =letter
+c.drawString( *coord( 15,20, height, mm), text ="Welcome to Reportlab! ")
+c.showPage()
+c.save()
+Chapter1-GettingStartedwithReportlab 12
+Inthisexamplewepassthe coordfunctionthexandycoordinates,butwetellittousemillimeters
+asourunit.Soinsteadofthinkinginpoints,wearetellingReportLabthatwewantthetexttostart
+15mmfromtheleftand20mmfromthetopofthepage.Yes,youreadthatright.Whenweusethe
+coordfunction, it uses the height to swap the origin’s y from the bottom to the top. If you had set
+yourCanvas’s bottomUp parametertozero,thenthisfunctionwouldn’tworkasexpected.Infact,
+wecouldsimplifythecoordfunctiontojustthefollowing:
+def coord(x, y, unit=1):
+x, y = x * unit, y * unit
+return x, y
+Nowwecanupdatethepreviousexamplelikethis:
+# canvas_coords2.py
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import mm
+def coord (x, y, unit =1):
+x, y =x*unit, y *unit
+return x, y
+c=canvas .Canvas( "hello.pdf ", bottomup =0)
+c.drawString( *coord( 15,20, mm), text ="Welcome to Reportlab! ")
+c.showPage()
+c.save()
+That seems pretty straight-forward. You should take a minute or two and play around with both
+examples. Try changing the x and y coordinates that you pass in. Then try changing the text too
+andseewhathappens!
+Canvas Methods
+Thecanvasobject has many methods. Let’s learn how we can use some of them to make our PDF
+documents more interesting. One of the easiest methods to use setFont, which will let you use a
+PostScriptfontnametospecifywhatfontyouwanttouse.Hereisasimpleexample:
+Chapter1-GettingStartedwithReportlab 13
+# font_demo.py
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+def font_demo (my_canvas, fonts):
+pos_y =750
+for font infonts:
+my_canvas .setFont(font, 12)
+my_canvas .drawString( 30, pos_y, font)
+pos_y -=10
+if__name__ =='__main__ ':
+my_canvas =canvas .Canvas( "fonts.pdf ",
+pagesize =letter)
+fonts =my_canvas .getAvailableFonts()
+font_demo(my_canvas, fonts)
+my_canvas .save()
+To make things a bit more interesting, we will use the getAvailableFonts canvas method to grab
+alltheavailablefontsthatwecanuseonthesystemthatthecodeisranon.Thenwewillpassthe
+canvas object and the list of font names to our font_demo function. Here we loop over the font
+names,setthefontandcallthe drawString methodtodraweachfont’snametothepage.Youwill
+alsonotethatwehavesetavariableforthestartingYpositionthatwethendecrementby10each
+timeweloopthrough.Thisistomakeeachtextstringdrawonaseparateline.Ifwedidn’tdothis,
+thestringswouldwriteontopofeachotherandyouwouldendupwithamess.
+Hereistheresultwhenyourunthefontdemo:
+Chapter1-GettingStartedwithReportlab 14
+Fig.1-2:AvailablefontsinReportLab
+If you want to change the font color using a canvas method, then you would want to look at
+setFillColor or one of its related methods. As long as you call that before you draw the string,
+thecolorofthetextwillchangeaswell.
+Another fun thing you can is use the canvas’s rotatemethod to draw text at different angles. We
+willalsolearnhowtousethe translate method.Let’stakealookatanexample:
+Chapter1-GettingStartedwithReportlab 15
+# rotating_demo.py
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.units import inch
+from reportlab.pdfgen import canvas
+def rotate_demo ():
+my_canvas =canvas .Canvas( "rotated.pdf ",
+pagesize =letter)
+my_canvas .translate(inch, inch)
+my_canvas .setFont( 'Helvetica ',14)
+my_canvas .drawString(inch, inch, 'Normal ')
+my_canvas .line(inch, inch, inch +100, inch)
+my_canvas .rotate( 45)
+my_canvas .drawString(inch, -inch, '45 degrees ')
+my_canvas .line(inch, inch, inch +100, inch)
+my_canvas .rotate( 45)
+my_canvas .drawString(inch, -inch, '90 degrees ')
+my_canvas .line(inch, inch, inch +100, inch)
+my_canvas .save()
+if__name__ =='__main__ ':
+rotate_demo()
+Hereweusethe translate methodtosetouroriginfromthebottomlefttoaninchfromthebottom
+leftandaninchup.Thenwesetoutfontfaceandfontsize.Nextwriteoutsometextnormallyand
+then we rotate the coordinate system itself 45 degrees before we draw a string. According to the
+ReportLabuserguide,youwillwanttospecifytheycoordinateinthenegativesincethecoordinate
+system is now in a rotated state. If you don’t do that, your string will be drawn outside the page’s
+boundary and you won’t see it. Finally we rotate the coordinate system another 45 degrees for a
+totalof90degrees,writeoutonelaststringanddrawthelastline.
+Itisinterestingtolookathowthelinesmovedeachtimewerotatedthecoordinatesystem.Youcan
+seethattheoriginofthelastlinemovedallthewaytotheveryleft-handedgeofthepage.
+HereistheresultwhenIranthiscode:
+Chapter1-GettingStartedwithReportlab 16
+Fig.1-3:Rotatedtext
+Nowlet’stakeamomentlearnaboutalignment.
+String Alignment
+Thecanvassupportsmorestringmethodsthanjusttheplain drawString method.Youcanalsouse
+drawRightString , which will draw your string right-aligned to the x-coordinate. You can also use
+drawAlignedString , which will draw a string aligned to the first pivot character, which defaults
+to the period. This is useful if you want to line up a series of floating point numbers on the page.
+Finally, there is the drawCentredString method, which will draw a string that is “centred” on the
+x-coordinate.Let’stakealook:
+# string_alignment.py
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+def string_alignment (my_canvas):
+width, height =letter
+my_canvas .drawString( 80,700,'Standard String ')
+my_canvas .drawRightString( 80,680,'Right String ')
+numbers =[987.15 ,42,-1,234.56 , (456.78 )]
+y=650
+Chapter1-GettingStartedwithReportlab 17
+for number innumbers:
+my_canvas .drawAlignedString( 80, y, str(number))
+y-=20
+my_canvas .drawCentredString(width /2,550,'Centered String ')
+my_canvas .showPage()
+if__name__ =='__main__ ':
+my_canvas =canvas .Canvas( "string_alignment.pdf ")
+string_alignment(my_canvas)
+my_canvas .save()
+When you run this code, you will quickly see how each f these strings get aligned. Personally I
+thoughtthe drawAlignedString methodwasthemostinteresting,buttheothersarecertainlyhandy
+intheirownright.Hereistheresultofrunningthecode:
+Fig.1-4:StringAlignment
+Thenextcanvasmethodswewilllearnaboutarehowtodrawlines,rectanglesandgrids!
+Drawing lines on the canvas
+Drawing a line in ReportLab is actually quite easy. Once you get used to it, you can actually
+create very complex drawings in your documents, especially when you combine it with some of
+Chapter1-GettingStartedwithReportlab 18
+ReportLab’sotherfeatures.Themethodtodrawastraightlineissimply line.Let’stakealookata
+simpleexample:
+# drawing_lines.py
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+def draw_lines (my_canvas):
+my_canvas .setLineWidth( .3)
+start_y =710
+my_canvas .line( 30, start_y, 580, start_y)
+for xinrange (10):
+start_y -=10
+my_canvas .line( 30, start_y, 580, start_y)
+if__name__ =='__main__ ':
+my_canvas =canvas .Canvas( "lines.pdf ", pagesize =letter)
+draw_lines(my_canvas)
+my_canvas .save()
+Here we create a simple draw_lines function that accepts a canvas object as its sole parameter.
+Thenwesettheline’swidthviathe setLineWidth method.Finallywecreateasingleline.Youwill
+noticethatthe linemethodacceptsfourarguments:x1,y1,x2,y2.Thesearethebeginningxandy
+coordinatesaswellastheendingxandycoordinates.Weaddanother10linesbyusinga forloop.
+Ifyourunthiscode,youroutputwilllooksomethinglikethis:
+Chapter1-GettingStartedwithReportlab 19
+Fig.1-5:Drawinglinesonthecanvas
+The canvas supports several other drawing operations. For example, you can also draw rectangles,
+wedgesandcircles.Here’sasimpledemo:
+Chapter1-GettingStartedwithReportlab 20
+# drawing_polygons.py
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+def draw_shapes ():
+c=canvas .Canvas( "draw_other.pdf ")
+c.setStrokeColorRGB( 0.2,0.5,0.3)
+c.rect( 10,740,100,80, stroke =1, fill =0)
+c.ellipse( 10,680,100,630, stroke =1, fill =1)
+c.wedge( 10,600,100,550,45,90, stroke =1, fill =0)
+c.circle( 300,600,50)
+c.save()
+if__name__ =='__main__ ':
+draw_shapes()
+Whenyourunthiscode,youshouldendupwithadocumentthatdrawssomethinglikethis:
+Chapter1-GettingStartedwithReportlab 21
+Fig.1-6:Drawingpolygonsonthecanvas
+Let’s take a few moments to go over the various arguments that each of these polygon methods
+accept.The rect’scodesignaturelookslikethis:
+def rect(self, x, y, width, height, stroke=1, fill=0):
+Thatmeansthatyousetthelowerleft-handcorneroftherectangle’spositionviaitsx/yparameters.
+Thenyousetitswidthandheight.ThestrokeparametertellsReportLabifitshoulddrawthelines,
+sointhedemocodeIset stroke=1,orTrue.ThefillparametertellsReportLabtofilltheinteriorof
+thepolygonthatIdrewwithacolor.
+Nowlet’slookatthe ellipse’sdefinition:
+def ellipse(self, x1, y1, x2, y2, stroke=1, fill=0):
+This one is very similar to the rect. According to method’s docstring, the x1, y1, x2, y2 parameters
+arethecornerpointsoftheenclosingrectangle.Thestrokeandfillparametersoperatethesameway
+astherect’s.Justforfun,wewentaheadandsettheellipse’sfillto1.
+Chapter1-GettingStartedwithReportlab 22
+Nextwehavethewedge:
+def wedge(self, x1,y1, x2,y2, startAng, extent, stroke=1, fill=0):
+The x1,y1, x2,y2 parameters for the wedge actually correspond to the coordinates of an invisible
+enclosingrectanglethatgoesaroundafull360degreecircleversionofthewedge.Soyouwillneed
+to imagine that the full circle with a rectangle around it to help you position a wedge correctly. It
+also has a starting angle parameter ( startAng) and theextentparameter, which basically tells the
+wedgehowfarouttoarcto.Theotherparametershavealreadybeenexplained.
+Finallywereachthe circlepolygon.It’smethodlookslikethis:
+def circle(self, x_cen, y_cen, r, stroke=1, fill=0):
+Thecircle’sargumentsareprobablythemostself-explanatoryofallofthepolygonswehavelooked
+at.Thex_cenandy_cenargumentsarethex/ycoordinatesofthecenterofthecircle.The rargument
+istheradius.Thestrokeandfillargumentsareprettyobvious.
+All the poloygons have the ability to set the stroke (or line) color via the setStrokeColorRGB
+method. It accepts Red, Green, Blue values for its parameters. You can also set the stroke color
+byusingthe setStrokeColor orthesetStrokeColorCMYK method.
+Therearecorrespondingfillcolorsetterstoo(i.e.setFillColor,setFillColorRGB,setFillColorCMYK),
+althoughIdidn’tshowthoseinthedemocode.Thereasonthatwasn’tcoveredaboveisthatweare
+goingtocoveritintheverynextsection!
+Using Colors in ReportLab
+ReportLabhassupportforapplyingcolorsinseveraldifferentways.Youcanaddacolortoadrawing
+using one of two methods: RGB or CMYK. In the case of RGB, there are actually three different
+methods:
+•Byspecifyingred/green/bluevalues(i.e.valuesmustbebetweenzeroandone)
+•Bynameor
+•Bygraylevel
+Frankly I think the gray level specification is a bit misleading in that you’re really only specifying
+what levelof gray youwant, not any other color. Let’s start with gray levelsthough and workour
+wayupthroughtheothermethods!
+Chapter1-GettingStartedwithReportlab 23
+# gray_color_demo.py
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+def gray_color_demo ():
+my_canvas =canvas .Canvas( "grays.pdf ",
+pagesize =letter)
+my_canvas .setFont( 'Helvetica ',10)
+x=30
+grays =[0.0,0.25 ,0.50 ,0.75 ,1.0]
+for gray ingrays:
+my_canvas .setFillGray(gray)
+my_canvas .circle(x, 730,20, fill =1)
+gray_str ="Gray={gray} ".format(gray =gray)
+my_canvas .setFillGray( 0.0)
+my_canvas .drawString(x -10,700, gray_str)
+x+=75
+my_canvas .save()
+if__name__ =='__main__ ':
+gray_color_demo()
+This code should be pretty self-explanatory, but let’s break it down anyway. First off, we create a
+listofdifferentgrayvalues.Thenwesetthefillcolorusing setFillGray .Afterthatwedrawacircle
+andtellittofill.Finallywecreateastringanddrawitunderneatheachcirclesowehavethecircles
+labeledwiththeirgrayvalue.Whenyourunthiscode,youshouldseesomethinglikethis:
+Chapter1-GettingStartedwithReportlab 24
+Fig.1-7:ReportLab’sshadesofgray
+Let’s move on to learn how to add some color. The first method we will look at is setting the fill
+colorbyname:
+# colors_demo.py
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+def color_demo ():
+my_canvas =canvas .Canvas( "colors.pdf ",
+pagesize =letter)
+my_canvas .setFont( 'Helvetica ',10)
+x=30
+sample_colors =[colors .aliceblue,
+colors .aquamarine,
+colors .lavender,
+colors .beige,
+colors .chocolate]
+for color insample_colors:
+my_canvas .setFillColor(color)
+Chapter1-GettingStartedwithReportlab 25
+my_canvas .circle(x, 730,20, fill =1)
+color_str ="{color} ".format(color =color ._lookupName())
+my_canvas .setFillColor(colors .black)
+my_canvas .drawString(x -10,700, color_str)
+x+=75
+my_canvas .save()
+if__name__ =='__main__ ':
+color_demo()
+Here we import the colorssub-module from ReportLab. Then we create a list of sample colors to
+iterateoverlikewedidwiththegraydemoearlier.Thenwedotheloopandcall setFillColor with
+the color’s name. Now if you actually were to print the color to standard out, so you would see
+somethinglikethis:
+>>> print(colors.aliceblue)
+Color(.941176,.972549,1,1)
+So these aren’t exactly just names. In fact, they are ReportLab Color objects with RGB values and
+an intensity level between 0 (dark) and 1 (full intensity). Anyway, the next piece of code of note is
+wherewegrabthecolor’snameviathe _lookupName() method.Therestofthecodeisprettyeasy
+tofigureout.
+Fig.1-8:Examplecolors
+Chapter1-GettingStartedwithReportlab 26
+If you want to use straight-up RGB or CMYK values, then you can edit the example above to call
+setFillColorRGB orsetFillColorCMYK respectively. They accept RGB or CMYK colors plus an
+alphaparameterrespectively.TheprimaryreasontouseCMYKisforwhenyouwantmorecontrol
+over how the ink in your printer is applied to the printer. Of course you will need a printer that
+supportCMYKforthistobereallyuseful.
+Adding a Photo
+ReportLab supports adding images to your PDFs via the Python Imaging Library (PIL) package.
+NotethatPILisnolongersupportedanditisrecommendedthatyoudownloadthe Pillowproject,
+a fork of PIL that works with both Python 2 and Python 3, something that the original PIL didn’t
+do. To install Pillow, you just need to issue the pip command in your terminal, although you will
+onlyneedtorunthisifitdidn’tautomaticallyinstallwhenyouinstalledReportLabitself:
+pip install pillow
+NowthatwehavePillowinstalled,let’stalkabouthowtoinsertaphotointoyourPDF.TheReport-
+Lab canvas object supports two methods: drawInlineImage anddrawImage . It is recommended
+that you use the newer drawImage method as it will cache the image and allow you to draw it
+many times while only being stored once in the PDF. If you use drawInlineImage , it will embed
+theimageintothepagestreamitself,whichmakesitmuchlessefficientastheimagewillbeadded
+multiple times to the document if you draw it more than once. While the documentation doesn’t
+mentionthis,IwouldassumethatthiscanalsomakethePDFlargerinfilesize.
+Inthisbook,wewillbeusingthe drawImage method.Here’sanexample:
+# image_on_canvas.py
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+def add_image (image_path):
+my_canvas =canvas .Canvas( "canvas_image.pdf ",
+pagesize =letter)
+my_canvas .drawImage(image_path, 30,600,
+width =100, height =100)
+my_canvas .save()
+if__name__ =='__main__ ':
+image_path ='snakehead.jpg '
+add_image(image_path)
+Chapter1-GettingStartedwithReportlab 27
+As you can see, the drawImage method accepts the image’s file path and its x / y position. These
+argumentsarerequired.Youcanalsospecifythewidthandheightoftheimage.Notethatthiswill
+not automatically scale the image or keep its aspect ratio, so you may end up stretching the image
+if you don’t know what you are doing. Finally you can also supply a maskparameter which will
+allowyoutocreateatransparentimage.Thisparameterisalistof6numberswhichallowstodefine
+arangeofRGBvalueswhichwillbemasked.
+In ReportLab version 2 and newer, there is a preserveAspectRatio parameter that you can set as
+well as an anchorparameter. See the docstring for the drawImage method for more information
+ontheirproperusage.
+Ifyouarecurious,here’swhatthePDFendeduplooking:
+Fig.1-9:Addinganimage
+Chapter1-GettingStartedwithReportlab 28
+The textobject
+Foradditionalcontrolofyourtext’spresentation,youcanalsousea textobject .FranklyIhavenever
+had the need for one of these as ReportLab’s Paragraph class gives you more than enough control
+over the presentation of your text. But to be thorough, I will show you how to create and use a
+textobject.OnebenefittousethetextobjectisthatitwillmakethePDFgenerationfasterifyouuse
+itinsteadofmakingseparatecallsto drawString .
+Let’sseeaquicklittledemo:
+# textobject_demo.py
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+def textobject_demo ():
+my_canvas =canvas .Canvas( "txt_obj.pdf ",
+pagesize =letter)
+# Create textobject
+textobject =my_canvas .beginText()
+# Set text location (x, y)
+textobject .setTextOrigin( 10,730)
+# Set font face and size
+textobject .setFont( 'Times-Roman ',12)
+# Write a line of text + carriage return
+textobject .textLine(text ='Python rocks! ')
+# Change text color
+textobject .setFillColor(colors .red)
+# Write red text
+textobject .textLine(text ='Python rocks in red! ')
+# Write text to the canvas
+my_canvas .drawText(textobject)
+my_canvas .save()
+Chapter1-GettingStartedwithReportlab 29
+if__name__ =='__main__ ':
+textobject_demo()
+Here we learn that to create a textobject , we need to call the canvas’s beginText method.
+If you happen to print out the textobject, you will find that it’s technically an instance of
+reportlab.pdfgen.textobject.PDFTextObject . Anyway, now that we have a textobject, we can set
+itscursorpositionusingacallto setTextOrigin .Thenwesetthefontfaceandsizeaswesawbefore.
+The next new item is the call to textLine, which will allow you to write a string to the buffer plus
+whatisbasicallyacarriagereturn.Thedocstringforthismethodstatesthatitmakesthe“textcursor
+moves down”, but that amounts to a carriage return in my eyes. There is also a textLines method
+that allows you to write a multiline string out as well. If you want to control the location of the
+cursor,thenyoumightwanttouse textOutasitwon’taddacarriagereturntotheendofthestring.
+The next thing we do is set the font color by calling setFillColor . In this example, we set the the
+nextstringoftexttoaredcolor.Thelaststepistocall drawText ,whichwillactuallydrawwhatever
+youhaveinyourtextobject.Ifyouskipcalling drawText ,thenyourtextwon’tbewrittenoutand
+youmayendupwithanemptyPDFdocument.
+Here’stheresultingPDF:
+Fig.1-10:Usingatextobject
+There are a lot of other methods you can call from your textobject. For example, if you want to
+move your cursor’s position somewhere other than the very next line, you can call moveCursor .
+Let’stakealook:
+Chapter1-GettingStartedwithReportlab 30
+# cursor_moving.py
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+def textobject_cursor ():
+canvas_obj =canvas .Canvas( "textobj_cursor.pdf ", pagesize =letter)
+# Create textobject
+textobject =canvas_obj .beginText()
+# Set text location (x, y)
+textobject .setTextOrigin( 10,730)
+for indent inrange (4):
+textobject .textLine( 'ReportLab cursor demo ')
+textobject .moveCursor( 15,15)
+canvas_obj .drawText(textobject)
+canvas_obj .save()
+if__name__ =='__main__ ':
+textobject_cursor()
+Herewejustsetupaloopthatwillprintoutthesamestringfourtimes,butatfourdifferentpositions.
+Youwillnotethatwemovethecursor15pointstotherightand15pointsdownthepagewitheach
+iterationoftheloop.Yes,whenusingatextobject,apositiveynumberwillmoveyoudown.
+Now, let’s say you would like to change the inter-character spacing; all you need to do is call
+setCharSpace .Infact,youcandoalotofinterestingspacingtrickswithtextobject,suchaschanging
+thespacebetweenwordusing setWordSpace orthespacebetweenlinesbycalling setLeading .Let’s
+takealookathowwemightchangethespacingofourtext:
+# char_spacing_demo.py
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+def textobject_char_spacing ():
+canvas_obj =canvas .Canvas( "textobj_char_spacing.pdf ",
+pagesize =letter)
+Chapter1-GettingStartedwithReportlab 31
+# Create textobject
+textobject =canvas_obj .beginText()
+# Set text location (x, y)
+textobject .setTextOrigin( 10,730)
+spacing =0
+for indent inrange (8):
+textobject .setCharSpace(spacing)
+line ='{} - ReportLab spacing demo '.format(spacing)
+textobject .textLine(line)
+spacing +=0.7
+canvas_obj .drawText(textobject)
+canvas_obj .save()
+if__name__ =='__main__ ':
+textobject_char_spacing()
+Inthisexample,weincreasetheloopfactorto8iterationsandcall setCharSpace() eachtimethrough
+theloop.Westartwithzerospacingandthenadd0.7ineachiteration.Youcanseetheresulthere:
+Fig.1-11:Characterspacingwiththetextobject
+Nowlet’sseehowapplyingwordspacingeffectsourtext:
+Chapter1-GettingStartedwithReportlab 32
+# wordspacing_demo.py
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+def wordspacer ():
+canvas_obj =canvas .Canvas( "textobj_word_spacing.pdf ",
+pagesize =letter)
+# Create textobject
+textobject =canvas_obj .beginText()
+# Set text location (x, y)
+textobject .setTextOrigin( 10,730)
+word_spacing =0
+for indent inrange (8):
+textobject .setWordSpace(word_spacing)
+line ='{} - ReportLab spacing demo '.format(word_spacing)
+textobject .textLine(line)
+word_spacing +=1.5
+canvas_obj .drawText(textobject)
+canvas_obj .save()
+if__name__ =='__main__ ':
+wordspacer()
+This example is pretty much the same as the previous one, but you will note that we are calling
+setWordSpace() insteadof setCharSpace() andweareincreasingthespacingbyafactorof 1.5in
+thisexample.Theresultingtextlookslikethis:
+Chapter1-GettingStartedwithReportlab 33
+Fig.1-12:Wordspacingwiththetextobject
+If you would like to create a superscript or subscript, then you would want to call setRiseon your
+textobject.Let’screateademothatdemonstrateshowsettingtheriseworksinReportLab:
+# canvas_rising.py
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+def apply_scripting (textobject, text, rise):
+textobject .setFont( "Helvetica-Oblique ",8)
+textobject .setRise(rise)
+textobject .textOut(text)
+textobject .setFont( "Helvetica-Oblique ",12)
+textobject .setRise( 0)
+def main ():
+canvas_obj =canvas .Canvas( "textobj_rising.pdf ",
+pagesize =letter)
+# Create textobject
+textobject =canvas_obj .beginText()
+textobject .setFont( "Helvetica-Oblique ",12)
+# Set text location (x, y)
+textobject .setTextOrigin( 10,730)
+textobject .textOut( 'ReportLab ')
+Chapter1-GettingStartedwithReportlab 34
+apply_scripting(textobject, 'superscript ',7)
+textobject .textOut( 'and ')
+apply_scripting(textobject, 'subscript ',-7)
+canvas_obj .drawText(textobject)
+canvas_obj .save()
+if__name__ =='__main__ ':
+main()
+Herewecreateacoupleoffunctions, apply_scripting andmain.Themainfunctionwillcreateour
+canvasandalltheotherbitsandpiecesweneed.Thenwewriteoutsomenormaltext.Thenextfew
+linesarewhereweapplysuperscripting(positive)andsubscripting(negative).Notethatweneedto
+set the rise back to zero between the superscript and subscript to make the word, “and”, appear in
+therightlocation.Assoonasyouapplyarisingvalue,itwillcontinuetoapplyfromthatpointon.
+So you will want to reset it to zero to make sure the text stays in a normal location. You will also
+note that we set the font size for the super and subscripts to be smaller than the regular text. Here
+istheresultofrunningthisexample:
+Fig.1-13:Canvasrisingwiththetextobject
+Check out ReportLab’s user guide for more interesting things you can do or check the source code
+itself.
+Create a Page Break
+OneofthefirstthingsIwantedtoknowwhenIwascreatingPDFswithReportLabwashowtoadd
+apagebreaksoIcouldhavemultipagePDFdocuments.Thecanvasobjectallowsyoutodothisvia
+theshowPage method. Note however that for complex documents, you will almost certainly use
+ReportLab’s flowables , which are special classes specifically for “flowing” your documents across
+multiplepages.Flowablesarekindofmindbendingintheirownright,buttheyarealsoalotnicer
+to use than trying to keep track of which page you are on and where your cursor position is at all
+times.
+Chapter1-GettingStartedwithReportlab 35
+Canvas Orientation (Portrait vs. Landscape)
+ReportLab defaults its page orientation to Portrait, which is what all word processors do as well.
+Butsometimesyouwillwanttouseapagein landscape instead.Thereareatleasttwowaystotell
+Reportlab to use a landscape orientation. The first one is a convenience function called landscape
+thatyoucanimportfrom reportlab.lib.pagesizes .Youwoulduseitlikethis:
+from reportlab.lib.pagesizes import landscape, letter
+from reportlab.pdfgen import canvas
+c=canvas .Canvas( 'test.pdf ', pagesize =letter)
+c.setPageSize( landscape(letter) )
+Theotherwaytosetlandscapeisjustsetthepagesizeexplicitly:
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+c=canvas .Canvas( 'test.pdf ', pagesize =letter)
+c.setPageSize( ( 11*inch, 8.5*inch) )
+Youcouldmakethismoregenericbydoingsomethinglikethisthough:
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+width, height =letter
+c=canvas .Canvas( 'test.pdf ', pagesize =letter)
+c.setPageSize( (height, width) )
+Thismightmakemoresense,especiallyifyouwantedtouseotherpopularpagesizes,likeA4.
+Other methods
+There are a bunch of additional methods that I’m not even going to cover in this chapter. For
+example, there are methods to set some metadata for your PDF, such as the author ( setAuthor ),
+title (setTitle) and subject ( setSubject ). ThebookmarkPage method is actually useful if you want
+to create bookmarks in your PDF though. There are also methods for creating a named form and
+theninteractingwithit( beginForm ,endForm,etc).JustgolookthroughtheReportLab’suserguide
+foracompletelistorcheckoutthecanvas’ssource.
+Chapter1-GettingStartedwithReportlab 36
+A Simple Sample Application
+Sometimes it’s nice to see how you can take what you’ve learned and see if applied. So let’s take
+someofthemethodswe’velearnedabouthereandcreateasimpleapplicationthatcreateaform:
+# sample_form_letter.py
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+def create_form (filename, date, amount, receiver):
+"""
+@param date: The date to use
+@param amount: The amount owed
+@param receiver: The person who received the amount owed
+"""
+my_canvas =canvas .Canvas(filename, pagesize =letter)
+my_canvas .setLineWidth( .3)
+my_canvas .setFont( 'Helvetica ',12)
+my_canvas .drawString( 30,750,'OFFICIAL COMMUNIQUE ')
+my_canvas .drawString( 30,735,'OF ACME INDUSTRIES ')
+my_canvas .drawString( 500,750, date)
+my_canvas .line( 480,747,580,747)
+my_canvas .drawString( 275,725,'AMOUNT OWED: ')
+my_canvas .drawString( 500,725, amount)
+my_canvas .line( 378,723,580,723)
+my_canvas .drawString( 30,703,'RECEIVED BY: ')
+my_canvas .line( 120,700,580,700)
+my_canvas .drawString( 120,703, receiver)
+my_canvas .save()
+if__name__ =='__main__ ':
+create_form( 'form.pdf ','01/23/2018 ',
+'$1,999 ','Mike ')
+Here we just create a simple function called create_form that accepts the filename, the date we
+wantforourform,theamountowedandthepersonwhoreceivestheamountowed.Thenwepaint
+everythinginthedesiredlocationsandsavethefile.Whenyourunthis,youwillseethefollowing:
+Chapter1-GettingStartedwithReportlab 37
+Fig.1-14:ASampleFormletter
+Thatlooksprettyprofessionalforashortpieceofcode.
+Wrapping Up
+Wecoveredalotofinformationinthischapter.Youshouldnowknowhowtocreateaprettybasic
+PDF. I highly recommend trying out the examples in this chapter and then going back and editing
+themabittoseewhatallyoucanaccomplishonyourown.Onceyouaredoneplayingaroundthe
+canvasmethodsmentionedhere,prepareyourselvesasthenextchapterwillbeabouthowReportLab
+handlesfonts.
+Chapter 2 - ReportLab and Fonts
+We covered a little information about fonts in chapter 1, but I thought it was important to talk a
+littleaboutReportLab’sfontsupport.Afewyearsago,ReportLabaddedsupportforAsianlanguages.
+They also support TrueType fonts and Type-1 fonts. It’s also worth talking about encodings in this
+chapter,whichiswhatwewilldiscussnext.
+Unicode / UTF8 is the Default
+Way back in 2006, ReportLab made it so that all text you provide to their APIs should be in UTF8
+or as Python Unicode objects. This should be done with the canvas.DrawString methods as well
+asintheflowablesthataccepttext(i.e.strings)astheirargument.FortunatelyPython3’s“strings”
+are Unicode by default, so you won’t even have to think all that much about this topic if you just
+usethelatestPython.HoweverifyouareusinganolderversionofPythonANDyourstringisnot
+encodedasUTF8,thenyouwillgeta UnicodeDecodeError ifyougiveitanycharacterthatisnot
+ASCII.
+ThefixistojustencodeyourtextasUTF8oruseaUnicodeobject.Justkeepthatinmindifyourun
+intothesesortsofissues.
+The Standard Fonts
+ReportLabcomeswithasetoffontsbydefault.Theydon’tneedtobestored/embeddedinyourPDF
+asAdobe’sAcrobatReaderguaranteesthattheywillbethere.Youcangetalistofthefontsavailable
+bycallingthe getAvailableFonts() canvasmethod.ThisisthelistIreceived:
+•Courier
+•Courier-Bold
+•Courier-BoldOblique
+•Courier-Oblique
+•Helvetica
+•Helvetica-Bold
+•Helvetica-BoldOblique
+•Helvetica-Oblique
+•Symbol
+•Times-Bold
+•Times-BoldItalic
+•Times-Italic
+•Times-Roman
+Chapter2-ReportLabandFonts 39
+•ZapfDingbats
+ReportLab supports limited automatic font substitution. This will happen only if the ReportLab
+engine detects a character that is not in your font of choice. In these cases, ReportLab’s engine
+willattempttoswitchtoSymbolorZapfDingbatstodisplaysaidcharacter.Here’saquickdemo:
+# basic_font_demo.py
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+def font_demo (my_canvas, fonts):
+pos_y =750
+for font infonts:
+my_canvas .setFont(font, 12)
+my_canvas .drawString( 30, pos_y, font)
+pos_y -=10
+if__name__ =='__main__ ':
+my_canvas =canvas .Canvas( "basic_font_demo.pdf ",
+pagesize =letter)
+fonts =my_canvas .getAvailableFonts()
+font_demo(my_canvas, fonts)
+my_canvas .save()
+You will note that all we need to do to get a list of fonts is to call the getAvailableFonts method.
+Whenyourunthiscode,youwillgetthefollowinginyourPDF:
+Chapter2-ReportLabandFonts 40
+Fig.2-1:Thestandardfonts
+Nowlet’slearnaboutembeddingfontsinyourPDFdocument.
+Other Type-1 Fonts
+If you need to embed a non-standard font, then you will need a couple of font description files.
+One needs to be in the Adobe AFM (Adobe Font Metrics) format and the other needs to be in PFB
+(Printer Font Binary) format. The Adobe AFM file is actually ASCII and tells ReportLab about the
+glyph’softhefont.Afont’sglyphdescribestheheight,width,boundingboxinformationandother
+fontmetrics.ThePFBdescribestheshapesofthefontandisinbinaryformat,soyouwon’tbeable
+to read it without a hex editor or similar. I have had to use these files for embedding a check font
+intoaPDFbefore.
+Fortunately, ReportLab actually includes an open source font called DarkGardenMK that they
+distribute with ReportLab in their fonts folder. Let’s write a little demo that shows how to embed
+thisfontinourPDF:
+Chapter2-ReportLabandFonts 41
+# type1_font_demo.py
+import os
+import reportlab
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfgen import canvas
+def embedded_font_demo ():
+my_canvas =canvas .Canvas( "type1_font_demo.pdf ",
+pagesize =letter)
+reportlab_folder =os.path .dirname(reportlab .__file__ )
+fonts_folder =os.path .join(reportlab_folder, 'fonts ')
+print ('ReportLab font folder is located at {} '.format(
+fonts_folder))
+afm =os.path .join(fonts_folder, 'DarkGardenMK.afm ')
+pfb =os.path .join(fonts_folder, 'DarkGardenMK.pfb ')
+# Register the font so we can use it
+font_face =pdfmetrics .EmbeddedType1Face(afm, pfb)
+pdfmetrics .registerTypeFace(font_face)
+face_name ='DarkGardenMK '
+font =pdfmetrics .Font( 'DarkGardenMK ',
+face_name,
+'WinAnsiEncoding ')
+pdfmetrics .registerFont(font)
+# Use the font!
+my_canvas .setFont( 'DarkGardenMK ',40)
+my_canvas .drawString( 10,730,'The DarkGardenMK font ')
+my_canvas .save()
+if__name__ =='__main__ ':
+embedded_font_demo()
+Thisisafairlycomplexprocess.Firstwehaveourimports.Notethatweneed pdfmetrics toregister
+thefont.ThenwecreateourdemofunctionandbuildthefontfolderbygettingReportLab’sinstall
+location.Iaddeda print()statementsothatyoucouldfindoutwherethisfolderislocatedincaseyou
+wouldliketobrowsethroughit.NextwegetthepathstotheAFMandPFBfiles.Nowwe’refinally
+Chapter2-ReportLabandFonts 42
+ready to register the font with ReportLab. That process begins by instantiating the pdfmetrics’s
+EmbeddedType1Face class and passing it the AFM and PFB file paths. Nextweregisterthe font’s
+face via the call to registerTypeFace . Funnily enough, I accidentally discovered that if I don’t call
+that function, the code works just fine, so I am actually not sure why this is needed other than
+possiblyasanitycheck.
+Anyway, the next step is to instantiate the Fontclass by passing it the name of the font, the face
+name and the encoding. Then you can just register the font by calling registerFont . Now we can
+actuallyusethefontinourPDF.ThisistheresultIgotwhenIranthiscode:
+Fig.2-2:EmbeddingaType-1Font
+Idon’tknowwhenyouwouldwanttousethisfontotherthanpossiblyforwhenadragonspeaks,
+butitlookskindofneat!
+You can also edit the T1 font search path in rl_settings.py , which is located in your ReportLab
+installation location. The variable you will need to set is called T1SearchPath . On my system, the
+defaultlookslikethis:
+>>>from reportlab import rl_settings
+>>>rl_settings .T1SearchPath
+('c:/Program Files/Adobe/Acrobat 9.0/Resource/Font ',
+'c:/Program Files/Adobe/Acrobat 8.0/Resource/Font ',
+'c:/Program Files/Adobe/Acrobat 7.0/Resource/Font ',
+'c:/Program Files/Adobe/Acrobat 6.0/Resource/Font ',
+'c:/Program Files/Adobe/Acrobat 5.0/Resource/Font ',
+'c:/Program Files/Adobe/Acrobat 4.0/Resource/Font ',
+'%(disk)s /Applications/Python %(sys_version)s /reportlab/fonts ',
+'/usr/lib/Acrobat9/Resource/Font ',
+'/usr/lib/Acrobat8/Resource/Font ',
+'/usr/lib/Acrobat7/Resource/Font ',
+'/usr/lib/Acrobat6/Resource/Font ',
+'/usr/lib/Acrobat5/Resource/Font ',
+'/usr/lib/Acrobat4/Resource/Font ',
+'/usr/local/Acrobat9/Resource/Font ',
+'/usr/local/Acrobat8/Resource/Font ',
+'/usr/local/Acrobat7/Resource/Font ',
+'/usr/local/Acrobat6/Resource/Font ',
+'/usr/local/Acrobat5/Resource/Font ',
+'/usr/local/Acrobat4/Resource/Font ',
+'/usr/share/fonts/default/Type1 ',
+Chapter2-ReportLabandFonts 43
+'%(REPORTLAB_DIR)s /fonts ',
+'%(REPORTLAB_DIR)s /../fonts ',
+'%(REPORTLAB_DIR)s /../../fonts ',
+'%(CWD)s /fonts ',
+'~/fonts ',
+'~/.fonts ',
+'%(XDG_DATA_HOME)s /fonts ',
+'~/.local/share/fonts ',
+'/usr/share/fonts/type1/gsfonts ')
+TrueType Fonts
+AddingTrueTypefontsinyourPDFusingReportLabisabitlesscomplicatedthanembeddingType-
+1Fonts.Let’stakealookandseehowTrueTypefontembeddingdiffersfromType-1:
+# truetype_font_demo.py
+import os
+import reportlab
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfgen import canvas
+def embedded_font_demo ():
+my_canvas =canvas .Canvas( "truetype_font_demo.pdf ",
+pagesize =letter)
+reportlab_folder =os.path .dirname(reportlab .__file__ )
+fonts_folder =os.path .join(reportlab_folder, 'fonts ')
+print ('ReportLab font folder is located at {} '.format(
+fonts_folder))
+# Register the font so we can use it
+vera_font_path =os.path .join(fonts_folder, 'Vera.ttf ')
+# Usage: TTFont(name,filename)
+vera_font =TTFont( 'Vera ', vera_font_path)
+pdfmetrics .registerFont(vera_font)
+Chapter2-ReportLabandFonts 44
+# Use a generic font
+my_canvas .setFont( 'Helvetica ',40)
+my_canvas .drawString( 10,730,'The Helvetica font ')
+# Use the font!
+my_canvas .setFont( 'Vera ',40)
+my_canvas .drawString( 10,690,'The Vera font ')
+my_canvas .save()
+if__name__ =='__main__ ':
+embedded_font_demo()
+One of the first changes is that we need to import TTFontfromreportlab.pdfbase.ttfonts . Then
+wemakeaninstanceofthatclassbypassingitthefont’snameandthefont’sfilepath.Thenwecall
+registerFont aswedidwiththeType-1fontsintheprevioussection.Therestofthecodeispretty
+muchthesame.
+Iwouldalsoliketopointoutthatthereisa registerFontFamily methodthatyoushouldbeaware
+of.Thismethodwillallowyoutomapthebold,italicandbolditalicversionsofthefonttothesame
+name.Ofcourseifyouhaveallthedifferentversionsofthefont,thanyoucanusethisfunctionto
+registerthosenametoo.Here’sthesignatureyouwoulduseforthe Verafont:
+pdfmetrics.registerFontFamily('Vera', normal='Vera',bold='VeraBd',
+italic='VeraIt',boldItalic='VeraBI')
+Asyoucansee,youjustpassthenameofthevariousflavorsofthefonttotheappropriateparameter.
+An alternative way to include TrueType fonts is to set the font search path in rl_settings.py in
+much the same way that you did the T1 search path. For TrueType fonts, you will want to set the
+TTFSearchPath variable.ThedefaultspathsthatReportLablooksinareasfollows:
+>>>from reportlab import rl_settings
+>>>rl_settings .TTFSearchPath
+('c:/winnt/fonts ',
+'c:/windows/fonts ',
+'/usr/lib/X11/fonts/TrueType/ ',
+'/usr/share/fonts/truetype ',
+'/usr/share/fonts ',
+'/usr/share/fonts/dejavu ',
+'%(REPORTLAB_DIR)s /fonts ',
+'%(REPORTLAB_DIR)s /../fonts ',
+'%(REPORTLAB_DIR)s /../../fonts ',
+'%(CWD)s /fonts ',
+'~/fonts ',
+Chapter2-ReportLabandFonts 45
+'~/.fonts ',
+'%(XDG_DATA_HOME)s /fonts ',
+'~/.local/share/fonts ',
+'~/Library/Fonts ',
+'/Library/Fonts ',
+'/Network/Library/Fonts ',
+'/System/Library/Fonts ',
+'/usr/share/fonts/truetype ',
+'/usr/share/fonts/truetype/kacst-one ',
+'/usr/share/fonts/truetype/freefont ',
+'/usr/share/fonts/truetype/nanum ',
+'/usr/share/fonts/truetype/ttf-khmeros-core ',
+'/usr/share/fonts/truetype/lohit-punjabi ',
+'/usr/share/fonts/truetype/takao-gothic ',
+'/usr/share/fonts/truetype/sinhala ',
+'/usr/share/fonts/truetype/ancient-scripts ',
+'/usr/share/fonts/truetype/tlwg ',
+'/usr/share/fonts/truetype/lyx ',
+'/usr/share/fonts/truetype/lao ',
+'/usr/share/fonts/truetype/fonts-guru-extra ',
+'/usr/share/fonts/truetype/abyssinica ',
+'/usr/share/fonts/truetype/dejavu ',
+'/usr/share/fonts/truetype/tibetan-machine ',
+'/usr/share/fonts/truetype/ubuntu-font-family ',
+'/usr/share/fonts/truetype/ttf-bitstream-vera ',
+'/usr/share/fonts/truetype/kacst ',
+'/usr/share/fonts/truetype/openoffice ',
+'/usr/share/fonts/truetype/liberation ',
+'/usr/share/fonts/truetype/noto ',
+'/usr/share/fonts/truetype/padauk ')
+Ifyourfontisinoneofthosepaths,thenyoucansimplifyyourcodeabitbecauseyouwon’tneed
+toincludetheentirepathanylonger:
+vera_font = TTFont('Vera', 'Vera.ttf')
+pdfmetrics.registerFont(vera_font)
+Asian Fonts
+Afewyearsago,ReportLabaddedsupportforAsianfonts.ReportLabcurrentlysupports,Japanese,
+TraditionalChinese(Taiwan/HongKong),SimplifiedChinese(mainlandChina)andKorean.They
+dothisbysupportingthefollowingfonts:
+Chapter2-ReportLabandFonts 46
+•chs=ChineseSimplified(mainland):‘STSong-Light’
+•cht=ChineseTraditional(Taiwan):‘MSung-Light’,‘MHei-Medium’
+•kor=Korean:‘HYSMyeongJoStd-Medium’,’HYGothic-Medium’
+•jpn=Japanese:‘HeiseiMin-W3’,‘HeiseiKakuGo-W5’
+IfyouuseoneofthesefontsinyourPDF,thenyouwilllikelydiscoverthatitisn’tinstalled
+andAdobe’sReadermaypopupadialoglikethefollowing:
+Fig.2-3:Fontpackagewarning
+Let’swritesomecodetowritethecharactersusedfortheword“Nippon”,whichmeansJapan.The
+characters we will use are Japanese kanji that were converted to Unicode. For this example, I just
+lookedupaUnicodeconverteronlineandaskedittoconvert“Nippon”toUnicode.Here’sthecode:
+# asian_font_demo.py
+# Works with Python 2 and 3
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+from reportlab.pdfgen import canvas
+def asian_font_demo ():
+my_canvas =canvas .Canvas( "asian_font_demo.pdf ",
+pagesize =letter)
+# Set a Japanese font
+pdfmetrics .registerFont(UnicodeCIDFont( 'HeiseiMin-W3 '))
+my_canvas .setFont( 'HeiseiMin-W3 ',16)
+Chapter2-ReportLabandFonts 47
+# Find a word or phrase in Unicode to write out
+nippon =u'\u65e5 \u672c '# Nippon / Japan in Unicode
+my_canvas .drawString( 25,730, nippon)
+my_canvas .save()
+if__name__ =='__main__ ':
+asian_font_demo()
+When I ran this and tried to open the resulting PDF with Adobe Reader, I received the aforemen-
+tioneddialogaboutneedingtodownloadafontpackage, FontPack11009_XtdAlf_Lang.msi ,which
+ended up being a 52 MB download. If you don’t install the font package, then the PDF will appear
+tobeblankwhenopened.Afterinstallingthefonts,Igotthefollowingresult:
+Fig.2-4:EmbeddinganAsianfont
+SincePython3supportsUnicodeoutofthebox,youdon’thavetouseUnicodecharactersdirectly
+like we did in the example above. You can just use the actual Kanji! Just for fun, I went ahead and
+updatedtheexampletousesomeactualKanji:
+Chapter2-ReportLabandFonts 48
+# asian_font_demo2.py
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+from reportlab.pdfgen import canvas
+def asian_font_demo ():
+my_canvas =canvas .Canvas( "asian_font_demo2.pdf ",
+pagesize =letter)
+# Set a Japanese font
+pdfmetrics .registerFont(UnicodeCIDFont( 'HeiseiMin-W3 '))
+my_canvas .setFont( 'HeiseiMin-W3 ',16)
+# Find a word or phrase in Unicode to write out
+nippon ='æ„›æƒ… '# Love in Japanese
+my_canvas .drawString( 25,730, nippon)
+my_canvas .save()
+if__name__ =='__main__ ':
+asian_font_demo()
+You can also use TrueType fonts that have Asian characters. This is even easier to use than the
+UnicodeCIDFont thatwehadtouseintheprevioussection.TheReportLabengineersdidmention
+intheirdocumentationthatthesekindsoffontscantaketimetoparseandthatlargesubsetsofthe
+font will need to be embedded in your PDF for the characters to be displayed correctly. They also
+notedthatReportLabcanalsoparse .ttcfiles,whichisavariantoftheTrueTypeextension, .ttf.
+There are also the Noto and Source Han (Sans/Serif) fonts, which are both open source. Noto is
+fromGoogleandaimstosupportalllanguageswhereasSourceHanSansisasetofOpenType/CFF
+Pan-CJKfontsfromAdobe.
+Chapter2-ReportLabandFonts 49
+Switching Between Fonts
+Fig.2-5:Switchingbetweenfonts
+We technically have already covered how to switch between fonts, but I didn’t actually call it out
+inthepreviousexamples.SoIwantedtomakesuremyreaderswerequiteclearonhowtochange
+fontswhilegeneratingtheirPDFswithReportLab.Let’stakealookatasimpledemo:
+# font_switching.py
+import string
+import sys
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfgen import canvas
+def standardFonts ():
+"""
+Create a PDF with all the standard fonts
+"""
+for enc in['MacRoman ','WinAnsi ']:
+canv =canvas .Canvas(
+'StandardFonts_ %s.pdf '%enc,
+Chapter2-ReportLabandFonts 50
+)
+canv .setPageCompression( 0)
+x=0
+y=744
+for faceName inpdfmetrics .standardFonts:
+iffaceName in['Symbol ','ZapfDingbats ']:
+encLabel =faceName +'Encoding '
+else :
+encLabel =enc +'Encoding '
+fontName =faceName +'-'+encLabel
+pdfmetrics .registerFont(pdfmetrics .Font(fontName,
+faceName,
+encLabel)
+)
+canv .setFont( 'Times-Bold ',18)
+canv .drawString( 80, y, fontName)
+y-=20
+alpha ="abcdefghijklmnopqrstuvwxyz "
+canv .setFont(fontName, 14)
+canv .drawString(x +85, y, alpha)
+y-=20
+canv .save()
+if__name__ =="__main__ ":
+standardFonts()
+Asmentionedearlier,Reportlabsupportsseveralfontsinternally.Youcanthinkofthemasstandard
+or default fonts. The script above will create two PDFs: StandardFonts_MacRoman.pdf and
+StandardFonts_WinAnsi.pdf . As you can see, we just use a nested pair of for loops to extract
+the various fonts and register them with Reportlab. Then we called setFontwith the selected font.
+From that point forward, ReportLab will use that font when it draws text. When you call setFont
+again,thatwillchangeyourcurrentlyselectedfonttotheoneyouspecifiedandthenthatwillbethe
+fontused.Inotherwords,ReportLabalwaysusesthelastsetfontorthedefaultuntilyouexplicitly
+setittosomethingelse.
+Bytheway,thedifferencebetweenMacRomanandWinAnsiisthatonewasdevelopedbyAppleand
+Chapter2-ReportLabandFonts 51
+theotherbecameaMicrosoftproprietarycharacterset.Whiletheyareidenticalforsomecharacter
+(32-126ofASCII),theyeachhavedifferentdistinctsetsofcontrolcharacters.
+Wrapping Up
+InthischapterwecoveredhowtoembedType-1andTrueTypefontsinourPDFsusingReportLab.
+WealsocoveredReportLab’sAsianfontsupport.Youshouldtakesometimeandplayaroundwith
+these examples to make sure you fully understand how to embed fonts in your PDF. This is quite
+handy when you need to give your documents a unique look or you need to support your Asian
+customers.
